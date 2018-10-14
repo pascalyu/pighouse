@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">PseudoName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pig in pigs %}
+                <tr>
+                    <th scope="row">{{pig.id}}</th>
+                    <td>{{pig.pseudoName}}</td>
+                    <td>{{pig.email}}</td>
+                    <td >
+                        <a href="#">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

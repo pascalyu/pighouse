@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="offset-md-3 col-md-6 " >
+
+
+        {{ form_start(houseForm) }}
+        <h2 class="text-center">Create a Pig-house</h2>
+        <div class="form-group ">
+            {{ form_row(houseForm.name,{'attr':{'placeholder':"My first pig house" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group ">
+            {{ form_row(houseForm.maxPigs,{'attr':{'placeholder':"" ,'class' :'form-control'}}) }}
+        </div>
+        
+         <div class="form-group ">
+            {{ form_row(houseForm.password.first,{'attr':{'placeholder':"piggy1234" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group ">
+            {{ form_row(houseForm.password.second,{'attr':{'placeholder':"piggy1234" ,'class' :'form-control'}}) }}
+        </div>
+
+
+
+
+        <div class="form-group text-center">
+            <button class="form-control btn btn-primary">Create !</button>
+        </div>
+
+        {{ form_end(houseForm) }}
+        <a href="#" class="no-padding-right">
+            Want to join an existing house?
+        </a>
+
+    </div>
+
+{% endblock %}

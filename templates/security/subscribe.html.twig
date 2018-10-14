@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="offset-md-3 col-md-6 col-xs" >
+        {{ form_start(pigForm) }}
+        <h2 class="text-center">Subscribe</h2>
+        <div class="form-group ">
+            {{ form_row(pigForm.pseudoName,{'attr':{'placeholder':"ex: SuperPig" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group ">
+            {{ form_row(pigForm.email,{'attr':{'placeholder':"ex: piggy@pigmail.^com" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group ">
+            {{ form_row(pigForm.password.first,{'attr':{'placeholder':"omg" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group ">
+            {{ form_row(pigForm.password.second,{'attr':{'placeholder':"omg" ,'class' :'form-control'}}) }}
+        </div>
+        <div class="form-group row " >
+                <a href="{{path('security_login')}}" class="col-md-6 no-padding-right">Already a pig?
+                </a>
+            </div>    
+        <div class="form-group text-center">
+            <button class="form-control btn btn-primary">Subscribe !</button>
+        </div>
+
+        {{ form_end(pigForm) }}
+    </div>
+
+{% endblock %}
