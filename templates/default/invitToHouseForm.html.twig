@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="offset-md-3 col-md-6 col-lg-6 col-xl-6 " >
+        <h2 class="text-center">Invit a pig to join your house</h2>
+        {{ message }}
+          <form action="" method="POST">
+     
+              
+
+            <div class="form-group ">
+                <label for="email_to_invit">email</label><input placeholder="test" name="email" class="form-control" id="email_to_invit"/>
+            </div>
+            <div class="form-group ">
+                <select class="form-control" name="houseId"  id="houses">
+                    {% for house in houses %}
+                        <option value="{{ house.id }}">{{ house.name }}</option>
+                    {% endfor %}
+                </select>   
+            </div>
+
+            <div class="form-group">
+                <button type="submit"  class="form-control btn btn-primary">Send invitation</button>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

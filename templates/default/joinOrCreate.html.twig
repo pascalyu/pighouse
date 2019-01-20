@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="" >
+        
+
+        <button><a href="{{path("joinHouseForm",{'pigId': app.user.id})}}">Join a house</a></button>
+        <button><a href="{{path("createHouseForm",{'pigId': app.user.id})}}">Create a house</a></button>
+       
+    </div>
+
+{% endblock %}

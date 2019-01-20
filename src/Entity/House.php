@@ -66,9 +66,21 @@ class House
      */
     private $pig;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Invitation", mappedBy="house")
+     */
+    private $invitations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Action", mappedBy="house_id")
+     */
+    private $actions;
+
     public function __construct()
     {
         $this->pigs = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +209,68 @@ class House
     public function setPig(?Pig $pig): self
     {
         $this->pig = $pig;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Invitation[]
+     */
+    public function getInvitations(): Collection
+    {
+        return $this->invitations;
+    }
+
+    public function addInvitation(Invitation $invitation): self
+    {
+        if (!$this->invitations->contains($invitation)) {
+            $this->invitations[] = $invitation;
+            $invitation->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvitation(Invitation $invitation): self
+    {
+        if ($this->invitations->contains($invitation)) {
+            $this->invitations->removeElement($invitation);
+            // set the owning side to null (unless already changed)
+            if ($invitation->getHouse() === $this) {
+                $invitation->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Action[]
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(Action $action): self
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions[] = $action;
+            $action->setHouseId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAction(Action $action): self
+    {
+        if ($this->actions->contains($action)) {
+            $this->actions->removeElement($action);
+            // set the owning side to null (unless already changed)
+            if ($action->getHouseId() === $this) {
+                $action->setHouseId(null);
+            }
+        }
 
         return $this;
     }

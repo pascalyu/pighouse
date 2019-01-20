@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Action index{% endblock %}
+
+{% block body %}
+    <h1>Action index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ActionType</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Created_at</th>
+                <th>Last_updated_at</th>
+                <th>Deleted_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for action in actions %}
+            <tr>
+                <td>{{ action.id }}</td>
+                <td>{{ action.actionType ? action.actionType|join(', ') : '' }}</td>
+                <td>{{ action.amount }}</td>
+                <td>{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ action.createdAt ? action.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ action.lastUpdatedAt ? action.lastUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ action.deletedAt ? action.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
+                    <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('action_new') }}">Create new</a>
+{% endblock %}

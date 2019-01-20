@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}House{% endblock %}
+
+{% block body %}
+    <h1>House</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ house.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ house.name }}</td>
+            </tr>
+            <tr>
+                <th>MaxPigs</th>
+                <td>{{ house.maxPigs }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ house.amount }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ house.createdAt ? house.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LastUpdatedAt</th>
+                <td>{{ house.lastUpdatedAt ? house.lastUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DeletedAt</th>
+                <td>{{ house.deletedAt ? house.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ house.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('house_index') }}">back to list</a>
+
+    <a href="{{ path('house_edit', {'id': house.id}) }}">edit</a>
+
+    {{ include('house/_delete_form.html.twig') }}
+{% endblock %}

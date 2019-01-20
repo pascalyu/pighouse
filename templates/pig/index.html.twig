@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pig index{% endblock %}
+
+{% block body %}
+    <h1>Pig index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PseudoName</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>CreatedAt</th>
+                <th>LastUpdatedAt</th>
+                <th>DeletedAt</th>
+                <th>Username</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pig in pigs %}
+            <tr>
+                <td>{{ pig.id }}</td>
+                <td>{{ pig.pseudoName }}</td>
+                <td>{{ pig.email }}</td>
+                <td>{{ pig.password }}</td>
+                <td>{{ pig.createdAt ? pig.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pig.lastUpdatedAt ? pig.lastUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pig.deletedAt ? pig.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pig.username }}</td>
+                <td>
+                    <a href="{{ path('pig_show', {'id': pig.id}) }}">show</a>
+                    <a href="{{ path('pig_edit', {'id': pig.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pig_new') }}">Create new</a>
+{% endblock %}

@@ -2,6 +2,34 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/Pig.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/sensio_framework_extra.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/House1Type.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/ActionController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/twig.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/bundles.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/PigController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/menuNavigation.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/DefaultController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/Pig1Type.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/house/edit.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/routes/dev/twig.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/routes/annotations.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/translation.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/security.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/routing.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/framework.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/House.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/swiftmailer.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/PigType.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/routes/dev/web_profiler.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/doctrine_migrations.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/routes.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/services.yaml</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/HouseController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/InvitationType.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/SecurityController.php</file>
+        </group>
     </open-files>
 </project-private>

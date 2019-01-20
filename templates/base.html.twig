@@ -16,23 +16,12 @@
 
         {{include('menuNavigation.html.twig') }}
 
-        <div class="row">
-            <div id="left-wing" class="col-md-3">
-                {% block leftWing %}
-                {% endblock %}
-            </div>
-            <div id="container" class="col-md-6 col-lg-6 col-xl-6">
+       
                 {% block body %}
 
 
                 {% endblock %}
-            </div>
-            <div id="right-wing" class="col-md-3">
-                {% block rightWing %}
-                {% endblock %}
-            </div>
-        </div>
-
+        
         {% block javascripts %}
         {% endblock %}
 

@@ -2,6 +2,8 @@ security:
     encoders:
         App\Entity\Pig:
             algorithm:  bcrypt
+        App\Entity\House:
+            algorithm:  bcrypt
        
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pig{% endblock %}
+
+{% block body %}
+    <h1>Create new Pig</h1>
+
+    {{ include('pig/_form.html.twig') }}
+
+    <a href="{{ path('pig_index') }}">back to list</a>
+{% endblock %}
