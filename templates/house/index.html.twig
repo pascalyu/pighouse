@@ -25,7 +25,7 @@
                 <td>{{ house.amount }}</td>
                 <td>{{ house.password }}</td>
                 <td>
-                    <a href="{{ path('house_show', {'id': house.id}) }}">show</a>
+                    <a href="{{ path('action_index', {'houseId': house.id}) }}">show</a>
                     <a href="{{ path('house_edit', {'id': house.id}) }}">edit</a>
                 </td>
             </tr>

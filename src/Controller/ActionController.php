@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Action;
+use App\Entity\House;
 use App\Form\ActionType;
 use App\Repository\ActionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,17 +17,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActionController extends AbstractController {
 
     /**
-     * @Route("/", name="action_index", methods="GET")
+     * @Route("/{houseId}", name="action_index", methods="GET")
      */
-    public function index(ActionRepository $actionRepository): Response {
+    public function index(ActionRepository $actionRepository, $houseId): Response {
+
+        $houseRepo = $this->getDoctrine()->getRepository(House::class);
+        $house = $houseRepo->find($houseId);
         $securityContext = $this->container->get('security.authorization_checker');
         $pig = $this->get('security.token_storage')->getToken()->getUser();
         $filters = array(
-             'pig_id' => $pig->id
-
+            'pig_id' => $pig->getId(),
         );
 
-        return $this->render('action/index.html.twig', ['actions' => $actionRepository->findOneBy($filters)]);
+        return $this->render('action/action.html.twig', [
+                    'actions' => $actionRepository->findOneBy($filters),
+                    'house_id' => $houseId,
+                    'house' => $house,
+        ]);
     }
 
     /**

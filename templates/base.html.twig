@@ -12,16 +12,18 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    <body>
+    <body >
+      
 
         {{include('menuNavigation.html.twig') }}
 
-       
+        <div id="main_block_body">
+            
                 {% block body %}
 
 
                 {% endblock %}
-        
+        </div>
         {% block javascripts %}
         {% endblock %}
 
