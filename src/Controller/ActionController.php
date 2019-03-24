@@ -6,7 +6,10 @@ use App\Entity\Action;
 use App\Entity\House;
 use App\Form\ActionType;
 use App\Repository\ActionRepository;
+use App\Service\HouseService;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,20 +20,63 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActionController extends AbstractController {
 
     /**
+     * @Route("/test", name="test", methods="GET")
+     */
+    public function test(HouseService $houseService, ObjectManager $manager, Request $request) {
+
+        $houseId = $request->get("house_id");
+      
+        //init
+        //sehouse
+        $pig = $this->get('security.token_storage')->getToken()->getUser();
+  
+        
+       
+        $houseService->init($pig,$houseId);
+        $amount = $request->get("amount");
+        $houseService->addAmount($amount);
+        $action =$houseService->getActionEntity();
+       $action->setPig(NULL);
+        $action->setHouse(NULL);
+        $jsonContent = $houseService->getActionJsonFormatListPage($action);
+
+        $response = new JsonResponse();
+        $response->setData(array('amount_saved' => true, 'action_entity' => $jsonContent));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    function changeAmount() {
+        
+    }
+
+    /**
+     * @Route("/{$amount}", name="change_house_amount")
+     */
+    public function changeHouseAmount(ActionRepository $actionRepository, $amount) {
+
+        $response = new JsonResponse();
+        $response->setData($data);
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
      * @Route("/{houseId}", name="action_index", methods="GET")
      */
-    public function index(ActionRepository $actionRepository, $houseId): Response {
+    public function index( ActionRepository $actionRepository, $houseId): Response {
+    
 
         $houseRepo = $this->getDoctrine()->getRepository(House::class);
         $house = $houseRepo->find($houseId);
-        $securityContext = $this->container->get('security.authorization_checker');
-        $pig = $this->get('security.token_storage')->getToken()->getUser();
         $filters = array(
-            'pig_id' => $pig->getId(),
+            'house' => $houseId,
         );
 
         return $this->render('action/action.html.twig', [
-                    'actions' => $actionRepository->findOneBy($filters),
+                    'actions' => $actionRepository->findBy($filters, array('created_at' => 'DESC')),
                     'house_id' => $houseId,
                     'house' => $house,
         ]);

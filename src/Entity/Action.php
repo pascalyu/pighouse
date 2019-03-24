@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
  */
-class Action
-{
+class Action {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -17,9 +20,9 @@ class Action
     private $id;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string", length=255)
      */
-    private $actionType = [];
+    private $actionType;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -37,123 +40,109 @@ class Action
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $last_updated_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $deleted_at;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\pig", inversedBy="actions")
      */
-    private $pig_id;
+    private $pig;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\house", inversedBy="actions")
      */
-    private $house_id;
+    private $house;
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getActionType(): ?array
-    {
+    public function getActionType(): ?string {
         return $this->actionType;
     }
 
-    public function setActionType(array $actionType): self
-    {
+    public function setActionType(?string $actionType): self {
         $this->actionType = $actionType;
 
         return $this;
     }
 
-    public function getAmount(): ?float
-    {
+    public function getAmount(): ?float {
         return $this->amount;
     }
 
-    public function setAmount(?float $amount): self
-    {
+    public function setAmount(?float $amount): self {
         $this->amount = $amount;
 
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
+    public function getDate(): ?DateTimeInterface {
         return $this->date;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
-    {
+    public function setDate(?DateTimeInterface $date): self {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
+    public function getCreatedAt(): ?DateTimeInterface {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
+    public function setCreatedAt(DateTimeInterface $created_at): self {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getLastUpdatedAt(): ?\DateTimeInterface
-    {
+    public function getLastUpdatedAt(): ?DateTimeInterface {
         return $this->last_updated_at;
     }
 
-    public function setLastUpdatedAt(\DateTimeInterface $last_updated_at): self
-    {
+    public function setLastUpdatedAt(DateTimeInterface $last_updated_at): self {
         $this->last_updated_at = $last_updated_at;
 
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
+    public function getDeletedAt(): ?DateTimeInterface {
         return $this->deleted_at;
     }
 
-    public function setDeletedAt(\DateTimeInterface $deleted_at): self
-    {
+    public function setDeletedAt(DateTimeInterface $deleted_at): self {
         $this->deleted_at = $deleted_at;
 
         return $this;
     }
 
-    public function getPigId(): ?pig
-    {
-        return $this->pig_id;
+    public function getPig(): ?pig {
+        return $this->pig;
     }
 
-    public function setPigId(?pig $pig_id): self
-    {
-        $this->pig_id = $pig_id;
+    public function setPig(?pig $pig): self {
+        $this->pig = $pig;
 
         return $this;
     }
 
-    public function getHouseId(): ?house
-    {
-        return $this->house_id;
+    public function getHouse(): ?house {
+        return $this->house;
     }
 
-    public function setHouseId(?house $house_id): self
-    {
-        $this->house_id = $house_id;
+    public function setHouse(?house $house): self {
+        $this->house = $house;
 
         return $this;
     }
+
+  
+    
 }

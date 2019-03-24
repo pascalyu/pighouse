@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Action{% endblock %}
-
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('action-action') }}
+{% endblock %}
 {% block body %}
+    
+    <div id="php_data_to_js">
+        <input id="house_id" value="{{house.id}}" hidden></input>
+        
+    </div>
     <h1>Action</h1>
 
     <div>
         <label>
-            House's amount: 
-            <span id="house_amount">{{ house.amount }}</span>  
+            House's amount: <input readonly id="house_amount_value" value="{{house.amount}}"></input>
         </label>
         <label>
             Amount to Add: 
-            <input value=""></input>
-            <button id="add-amount-to-house-button" type="button" class="btn btn-primary glyphicon-plus"></button>
+            <input id="amount_to_add" value="0"></input>
+            <button id="add-amount-to-house-button" data-href="{{ path('test')}}"   type="button" class="btn btn-primary glyphicon-plus"></button>
 
         </label>
 
@@ -50,7 +57,7 @@
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="action-historic">
             {% for action in actions %}
                 <tr>
                     <td>{{ action.id }}</td>

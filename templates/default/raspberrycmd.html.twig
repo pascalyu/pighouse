@@ -21,5 +21,18 @@ apt-get install mcrypt
    
    site accessible depuis serveur local
  
-
+ pour màj lmes js /css
+ 
     
+     yarn run encore dev --watch
+     
+     poour rajouter specific js à une page
+     
+     + {% block javascripts %}
++     {{ parent() }}
++     {{ encore_entry_script_tags('checkout') }}
++ {% endblock %}
+
+utiliser à chaque fois qu'on fiat modif js 
+
+yarn run encore dev 
