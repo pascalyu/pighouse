@@ -60,12 +60,14 @@ class Action {
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\pig", inversedBy="actions")
+     *  @Expose
      * 
      */
     private $pig;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\house", inversedBy="actions")
+     * 
      */
     private $house;
     private $colorClass;

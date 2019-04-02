@@ -27,8 +27,8 @@
     </div>    
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
+            <tr align="center">
+                <th>Pig</th>
                 
                 <th>Amount</th>
                 <th>Date</th>
@@ -38,13 +38,13 @@
         </thead>
         <tbody id="action-historic">
             {% for action in actions %}
-                <tr>
-                    <td>{{ action.id }}</td>
+                <tr align="center">
+                    <td >{{ action.pig.pseudoName }}</td>
                    
                     <td class="{{ action.colorClass }}">{{ action.amount }}</td>
-                    <td>{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td  >{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
                  
-                    <td>
+                    <td  >
                         <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
                         <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
                     </td>

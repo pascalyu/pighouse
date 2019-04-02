@@ -50,11 +50,7 @@ class ActionController extends AbstractController {
 
         $houseId = $request->get("house_id");
       
-       
         $pig = $this->get('security.token_storage')->getToken()->getUser();
-  
-        
-       
         $houseService->init($pig,$houseId);
         $amount = $request->get("amount");
         $houseService->addAmount($amount);
@@ -83,7 +79,8 @@ class ActionController extends AbstractController {
             'house' => $houseId,
         );
         
-        $actions=$houseService->addGreenRedClass($actionRepository->findBy($filters, array('created_at' => 'DESC')));
+        $actions=$actionRepository->findBy($filters, array('created_at' => 'DESC'));
+        
         return $this->render('action/action.html.twig', [
                     'actions' => $actions,
                     'house_id' => $houseId,
