@@ -6,10 +6,10 @@
     {{ encore_entry_script_tags('action-action') }}
 {% endblock %}
 {% block body %}
-    
+
     <div id="php_data_to_js">
         <input id="house_id" value="{{house.id}}" hidden></input>
-        
+
     </div>
     <h1>Action</h1>
 
@@ -18,42 +18,21 @@
             House's amount: <input readonly id="house_amount_value" value="{{house.amount}}"></input>
         </label>
         <label>
-            Amount to Add: 
-            <input id="amount_to_add" value="0"></input>
-            <button id="add-amount-to-house-button" data-href="{{ path('test')}}"   type="button" class="btn btn-primary glyphicon-plus"></button>
-
+            Amount to commit: 
+            <input id="amount_to_commit" value="0"></input>
+            <button id="add-amount-to-house-button" data-href="{{ path('add')}}"   type="button" class="btn btn-primary glyphicon-plus"></button>
+            <button id="substract-amount-to-house-button" data-href="{{ path('substract')}}"  type="button" class="btn btn-primary glyphicon-minus"></button>
         </label>
-
-        <label>
-            I spent: 
-            <input value=""></input>
-            <button id="substract-amount-to-house-button" type="button" class="btn btn-primary glyphicon-minus"></button>
-
-
-        </label>
-
-        <button type="button" class="btn btn-secondary">Secondary</button>
-        <button type="button" class="btn btn-success">Success</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-link">Link</button>
-
-
-
-
 
     </div>    
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>ActionType</th>
+                
                 <th>Amount</th>
                 <th>Date</th>
-                <th>Created_at</th>
-                <th>Last_updated_at</th>
-                <th>Deleted_at</th>
+              
                 <th>actions</th>
             </tr>
         </thead>
@@ -61,12 +40,10 @@
             {% for action in actions %}
                 <tr>
                     <td>{{ action.id }}</td>
-                    <td>{{ action.actionType ? action.actionType|join(', ') : '' }}</td>
-                    <td>{{ action.amount }}</td>
+                   
+                    <td class="{{ action.colorClass }}">{{ action.amount }}</td>
                     <td>{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ action.createdAt ? action.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ action.lastUpdatedAt ? action.lastUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ action.deletedAt ? action.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                 
                     <td>
                         <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
                         <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>

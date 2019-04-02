@@ -18,27 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/action")
  */
 class ActionController extends AbstractController {
-
-    /**
-     * @Route("/test", name="test", methods="GET")
+       /**
+     * @Route("/substract", name="substract", methods="GET")
      */
-    public function test(HouseService $houseService, ObjectManager $manager, Request $request) {
+    public function substract(HouseService $houseService, ObjectManager $manager, Request $request) {
 
         $houseId = $request->get("house_id");
       
-        //init
-        //sehouse
         $pig = $this->get('security.token_storage')->getToken()->getUser();
   
         
        
         $houseService->init($pig,$houseId);
         $amount = $request->get("amount");
-        $houseService->addAmount($amount);
+        $houseService->substractAmount($amount);
         $action =$houseService->getActionEntity();
-       $action->setPig(NULL);
-        $action->setHouse(NULL);
-        $jsonContent = $houseService->getActionJsonFormatListPage($action);
+        $jsonContent = $houseService->getActionJsonFormat($action);
 
         $response = new JsonResponse();
         $response->setData(array('amount_saved' => true, 'action_entity' => $jsonContent));
@@ -47,26 +42,39 @@ class ActionController extends AbstractController {
         return $response;
     }
 
-    function changeAmount() {
-        
-    }
 
     /**
-     * @Route("/{$amount}", name="change_house_amount")
+     * @Route("/add", name="add", methods="GET")
      */
-    public function changeHouseAmount(ActionRepository $actionRepository, $amount) {
+    public function add(HouseService $houseService, ObjectManager $manager, Request $request) {
+
+        $houseId = $request->get("house_id");
+      
+       
+        $pig = $this->get('security.token_storage')->getToken()->getUser();
+  
+        
+       
+        $houseService->init($pig,$houseId);
+        $amount = $request->get("amount");
+        $houseService->addAmount($amount);
+        $action =$houseService->getActionEntity();
+        $jsonContent = $houseService->getActionJsonFormat($action);
 
         $response = new JsonResponse();
-        $response->setData($data);
+        $response->setData(array('amount_saved' => true, 'action_entity' => $jsonContent));
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+   
 
+
+ 
     /**
      * @Route("/{houseId}", name="action_index", methods="GET")
      */
-    public function index( ActionRepository $actionRepository, $houseId): Response {
+    public function index(HouseService $houseService, ActionRepository $actionRepository, $houseId): Response {
     
 
         $houseRepo = $this->getDoctrine()->getRepository(House::class);
@@ -74,14 +82,15 @@ class ActionController extends AbstractController {
         $filters = array(
             'house' => $houseId,
         );
-
+        
+        $actions=$houseService->addGreenRedClass($actionRepository->findBy($filters, array('created_at' => 'DESC')));
         return $this->render('action/action.html.twig', [
-                    'actions' => $actionRepository->findBy($filters, array('created_at' => 'DESC')),
+                    'actions' => $actions,
                     'house_id' => $houseId,
                     'house' => $house,
         ]);
     }
-
+    
     /**
      * @Route("/new", name="action_new", methods="GET|POST")
      */

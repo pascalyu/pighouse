@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
+ * @ExclusionPolicy("all")
  */
 class Action {
 
@@ -16,41 +17,50 @@ class Action {
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $actionType;
 
     /**
+     * 
      * @ORM\Column(type="float", nullable=true)
+     *  @Expose
      */
     private $amount;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Expose
      */
     private $date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Expose
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Expose
      */
     private $last_updated_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Expose
      */
     private $deleted_at;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\pig", inversedBy="actions")
+     * 
      */
     private $pig;
 
@@ -58,6 +68,21 @@ class Action {
      * @ORM\ManyToOne(targetEntity="App\Entity\house", inversedBy="actions")
      */
     private $house;
+    private $colorClass;
+
+    public function getColorClass(): ?string {
+        $result = "red";
+        if ($this->actionType === "ADD") {
+
+            $result = "green";
+        }
+        $this->colorClass = $result;
+        return $result;
+    }
+
+    public function setColorClass(): ?string {
+        return $this->actionType;
+    }
 
     public function getId(): ?int {
         return $this->id;
@@ -143,6 +168,4 @@ class Action {
         return $this;
     }
 
-  
-    
 }
