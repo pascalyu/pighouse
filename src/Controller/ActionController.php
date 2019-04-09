@@ -55,6 +55,7 @@ class ActionController extends AbstractController {
         $amount = $request->get("amount");
         $houseService->addAmount($amount);
         $action =$houseService->getActionEntity();
+     
         $jsonContent = $houseService->getActionJsonFormat($action);
 
         $response = new JsonResponse();

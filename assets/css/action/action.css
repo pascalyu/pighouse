@@ -14,3 +14,12 @@ and open the template in the editor.
 .green{
     color: #449d44  ;
 }
+.button-red{
+    background-color: #c9302c;
+    color: white;
+}
+
+.button-green{
+    background-color: #449d44;
+    color: white;
+}

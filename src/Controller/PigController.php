@@ -7,8 +7,10 @@ use App\Form\Pig1Type;
 use App\Repository\PigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Flex\Response;
+
+
 
 /**
  * @Route("/pig")
@@ -55,19 +57,26 @@ class PigController extends AbstractController {
      * @Route("/{id}/edit", name="pig_edit", methods="GET|POST")
      */
     public function edit(Request $request, Pig $pig): Response {
+      
         $form = $this->createForm(Pig1Type::class, $pig);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('pig_edit', ['id' => $pig->getId()]);
         }
-
+        $pig->setHouses(NULL);
+        $pig->setActions(NULL);
         return $this->render('pig/edit.html.twig', [
                     'pig' => $pig,
                     'form' => $form->createView(),
         ]);
+        
+        
+     
+        
+        
     }
 
     /**

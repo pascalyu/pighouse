@@ -7,7 +7,6 @@ use App\Entity\House;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -68,20 +67,33 @@ class HouseService {
     public function getActionJsonFormat($action) {
         $result = $action;
 
-        $result->setPig(NULL);
-        $result->setHouse(NULL);
+
 
         $encoders = [new JsonEncoder()];
 
         $normalizer = new ObjectNormalizer();
 
+        $normalizer->setIgnoredAttributes(['house']);
+
 // all callback parameters are optional (you can omit the ones you don't use)
         $normalizer->setCircularReferenceHandler(function ($object, string $format = null, array $context = []) {
-            return $object->getName();
+            return $object->getId();
         });
 
-
-
+        $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
+            return $innerObject instanceof \DateTime ? $innerObject->format('Y-m-d H:i:s') : '';
+        };
+        $callbackPig = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
+            return $innerObject instanceof \App\Entity\Pig ? $innerObject->getPseudoName() : '';
+        };
+        $dateArrayCallback=['createdAt' => $callback,'date' => $callback,'lastUpdatedAt' => $callback,'pig'=> $callbackPig];
+        
+       
+        
+        if ($result->getDeletedAt() !== null) {
+            $dateArrayCallback['deletedAt']=$callback;
+        }
+         $normalizer->setCallbacks($dateArrayCallback);
 
         $serializer = new Serializer([$normalizer], $encoders);
 
@@ -89,40 +101,14 @@ class HouseService {
 
         $decoded = json_decode($jsonContent);
 
-        $decoded->date = $result->getDate()->format('Y-m-d H:i:s');
-        $decoded->lastUpdatedAt = $result->getLastUpdatedAt()->format('Y-m-d H:i:s');
-        $decoded->createdAt = $result->getCreatedAt()->format('Y-m-d H:i:s');
 
-        if ($result->getDeletedAt() !== null) {
-            $decoded->deletedAt = $result->getDeletedAt()->format('Y-m-d H:i:s');
-        }
+
 
 
         return json_encode($decoded);
     }
-
-    public function addGreenRedClass($actions) {
-
-return $actions;
-
-
-
-        $serializer = SerializerBuilder::create()->build();
-        $actions = $serializer->toArray($actions);
-
-
-        foreach ($actions as $index => $action) {
-            $action = $serializer->toArray($action);
-           
-            if ($action["action_type"] === "ADD") {
-                $actions[$index]['class'] = "red";
-            }
-            if ($action["action_type"] === "SUBSTRACT") {
-                $actions[$index]['class'] = "green";
-            }
-        }
-        return $actions;
-    }
+    
+    
 
     public function setHouseEntityById($houseId) {
         $this->houseEntity = $this->houseRepository->find($houseId);

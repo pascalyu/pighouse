@@ -5,6 +5,7 @@
  */
 require('../../css/action/action.css');
 $(document).ready(function () {
+    changeDisplayAmountsButtons();
     $("#add-amount-to-house-button").on("click", function () {
         callChangeAmountAction($(this).data("href"), successAddAmount);
     });
@@ -12,9 +13,16 @@ $(document).ready(function () {
     $("#substract-amount-to-house-button").on("click", function () {
         callChangeAmountAction($(this).data("href"), successSubstractAmount);
     });
+    $("#amount_to_commit").on("input",function(){
+        changeDisplayAmountsButtons();
+    });
 });
 
-
+function changeDisplayAmountsButtons(){
+ 
+    $("#new-amount-add-display").html(parseFloat($("#house_amount_value").val())+parseFloat($("#amount_to_commit").val()));
+    $("#new-amount-substract-display").html(parseFloat($("#house_amount_value").val())-parseFloat($("#amount_to_commit").val()));
+}
 function callChangeAmountAction(href, callbackSuccess) {
     $.ajax({
         type: "get",
@@ -49,16 +57,25 @@ function successSubstractAmount(data) {
 function addActionRow(actionEntity) {
     actionsTable = document.getElementById("action-historic");
     row = actionsTable.insertRow(0);
+    $(row).attr("align","center");
     columnsCorrespondance = getColumnsCorrespondance();
-    Object.keys(actionEntity).forEach(function (index) {
+    Object.keys(columnsCorrespondance).forEach(function (index) {
         row.insertCell(columnsCorrespondance[index]).innerHTML = actionEntity[index];
     });
-
+    $(row).find("td:eq("+columnsCorrespondance['amount']+")").attr("class",actionEntity['colorClass']);
+     $(row).hide();
+     $(row).fadeToggle();
 }
-
+function addColorClassToAmountCell(classColor,row){
+     columnsCorrespondance = getColumnsCorrespondance();
+    Object.keys(columnsCorrespondance).forEach(function (index) {
+        if(index=="amount");
+    });
+    
+}
 function getColumnsCorrespondance() {
     var result = {
-        "id": 0,
+        "pig": 0,
         "amount": 1,
         "date": 2,
        };

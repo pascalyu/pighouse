@@ -153,6 +153,13 @@ class Action {
     public function getPig(): ?pig {
         return $this->pig;
     }
+    public function getPigId(): ?int {
+        return $this->pig->getId();
+    }
+ public function getHouseId(): ?int {
+        return $this->house->getId();
+    }
+
 
     public function setPig(?pig $pig): self {
         $this->pig = $pig;

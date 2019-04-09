@@ -68,6 +68,7 @@ class Pig implements UserInterface {
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\House", mappedBy="pigs")
+     * 
      */
     private $houses;
 
@@ -298,5 +299,12 @@ class Pig implements UserInterface {
     public function __toString() {
         return $this->pseudoName;
     }
-
+    public function setHouses($houses){
+        
+        $this->houses= $houses;
+    }
+     public function setActions($actions){
+        
+        $this->actions= $actions;
+    }
 }

@@ -19,7 +19,6 @@ class ActionType extends AbstractType
             ->add('last_updated_at')
             ->add('deleted_at')
             ->add('pig_id')
-            ->add('house_id')
         ;
     }
 
