@@ -18,6 +18,11 @@ class InvitationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Invitation::class);
     }
+    
+    public function test(){
+        dump("test");
+        return "azeazeaezaze";
+    }
 
 //    /**
 //     * @return Invitation[] Returns an array of Invitation objects

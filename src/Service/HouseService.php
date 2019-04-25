@@ -14,7 +14,6 @@ use Symfony\Component\Serializer\Serializer;
 class HouseService {
 
     private $objectManager;
-    private $context;
     private $houseRepository;
     private $actionRepository;
     private $houseEntity;
@@ -26,9 +25,9 @@ class HouseService {
         $this->objectManager = $objectManager;
     }
 
-    public function init($pig, $houseId) {
+    public function init($pig) {
         $this->pig = $pig;
-        $this->houseEntity = $this->houseRepository->find($houseId);
+        $this->houseEntity = $this->houseRepository->find($pig->getJoinedHouse()->getId());
     }
 
     public function addAmount($amountToAdd) {
@@ -140,5 +139,6 @@ class HouseService {
     public function testze() {
         var_dump("test service ok");
     }
+    
 
 }

@@ -40,3 +40,17 @@ yarn run encore dev
 
 pour ne pas lancer à chaque fois
 yarn encore dev --watch
+
+-------------
+sql
+
+php bin/console make:entity  -> si existe déjà l'entioty va le modifier (rajouter des champs etc)
+
+php bin/console make:migration -> crée le fichier de migraitobn
+
+ php bin/console doctrine:migrations:migrate -> lance le ficheir de migration ( the last one)
+ 
+ 
+ php bin/console doctrine:migrations:generate-> genere un truc vide
+
+php bin/console server:dump

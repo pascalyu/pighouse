@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\House;
-use App\Entity\Invitation;
 use App\Entity\Pig;
 use App\Form\HouseType;
-use DateTime;
+use App\Service\UtilService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,23 +19,22 @@ class DefaultController extends AbstractController {
      */
     public function index() {
 
-
         $securityContext = $this->container->get('security.authorization_checker');
-        /* if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-          $pig = $this->get('security.token_storage')->getToken()->getUser();
-          if (!$pig->hasHouse()) {
-          return $this->redirectToRoute('createHouseForm', array("pigId" => $pig->getId()));
-          }
-          return $this->redirectToRoute('home');
-          }
-          if ($securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY ')) {
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $pig = $this->get('security.token_storage')->getToken()->getUser();
+            if (!$pig->hasHouse()) {
+                return $this->redirectToRoute('createHouseForm', array("pigId" => $pig->getId()));
+            }
+            return $this->redirectToRoute('action_index');
+        }
+        if ($securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY ')) {
 
-          return $this->redirectToRoute('security_login');
-          }
-          if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY ')) {
+            return $this->redirectToRoute('security_login');
+        }
+        if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY ')) {
 
-          return $this->redirectToRoute('home');
-          } */
+            return $this->redirectToRoute('action_index');
+        }
 
         return $this->redirectToRoute('security_login');
     }
@@ -44,7 +42,7 @@ class DefaultController extends AbstractController {
     /**
      * @Route("/home", name="home")
      */
-    public function home(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
+    public function home() {
 
         return $this->render('default/home.html.twig');
     }
@@ -61,34 +59,43 @@ class DefaultController extends AbstractController {
     /**
      * @Route("/createHouseForm/{pigId}", name="createHouseForm")
      */
-    /* public function createHouseForm(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $pigId) {
-      $house = new House();
-      $houseForm = $this->createForm(HouseType::class, $house);
-      $houseForm->handleRequest($request);
-      if ($houseForm->isSubmitted() && $houseForm->isValid()) {
+    public function createHouseForm(Request $request, ObjectManager $manager, \App\Repository\HouseRepository $houseRepository, UserPasswordEncoderInterface $encoder, $pigId) {
+        $house = new House();
+        $houseForm = $this->createForm(HouseType::class, $house);
+        $houseForm->handleRequest($request);
+        if ($houseForm->isSubmitted() && $houseForm->isValid()) {
 
-      $pigRepo = $this->getDoctrine()->getRepository(Pig::class);
-      $pig = $pigRepo->find($pigId);
-      $house->setPig($pig);
-      $house->setAmount(0);
-      $house->addPig($pig);
-      $pig->addHouse($house);
+            $pigRepo = $this->getDoctrine()->getRepository(Pig::class);
+            $pig = $pigRepo->find($pigId);
+            $house->setPig($pig);
+            $house->setCreatedAt( new DateTime());
+            $house->setAmount(0);
+            $house->addPig($pig);
+            $pig->addHouse($house);
+            
+            $usedUniquesId = UtilService::makeSQLArrayToOneArray($houseRepository->findByUniqueIdNotNull());
+            do {
+                $houseUniqueId = UtilService::generateRandomString(8);
+            } while (in_array($houseUniqueId, $usedUniquesId));
+            $house->setAmount(0);
+            $house->setHouseUniqueId($houseUniqueId);
+            
+            
+            $manager->persist($pig);
 
-      $manager->persist($pig);
+            $manager->persist($house);
+            $manager->flush();
+            return $this->redirectToRoute('successPage');
+        }
+        return $this->render('default/createHouseForm.html.twig', [
+                    'houseForm' => $houseForm->createView(),
+        ]);
+    }
 
-      $manager->persist($house);
-      $manager->flush();
-      return $this->redirectToRoute('successPage');
-      }
-      return $this->render('default/createHouseForm.html.twig', [
-      'houseForm' => $houseForm->createView(),
-      ]);
-      }
-
-      /**
+    /**
      * @Route("/house/{id}", name="house")
-     */
-    public function editHouseForm($message = null) {
+     
+    public function editHouseForm(ObjectManager $manager, Request $request) {
         $house = new House();
         $houseForm = $this->createForm(HouseType::class, $house);
         $houseForm->handleRequest($request);
@@ -98,16 +105,14 @@ class DefaultController extends AbstractController {
             $manager->flush();
             return $this->redirectToRoute('pig_house');
         }
-        return $this->render('security/subscribe.html.twig', [
-                    'pigForm' => $pigForm->createView(),
-        ]);
+        $message = "ss";
 
-
-        return $this->render('default/success.html.twig', [
+        return $this->render('default/createHouseForm.html.twig', [
                     'message' => $message,
+                    'houseForm' => $houseForm->createView(),
         ]);
     }
-
+*/
     /**
      * @Route("/joinOrCreate", name="joinOrCreate")
      */

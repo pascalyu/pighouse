@@ -12,39 +12,25 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method House[]    findAll()
  * @method House[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HouseRepository extends ServiceEntityRepository
-{
-    public function __construct(RegistryInterface $registry)
-    {
+class HouseRepository extends ServiceEntityRepository {
+
+    public function __construct(RegistryInterface $registry) {
         parent::__construct($registry, House::class);
     }
 
-//    /**
-//     * @return House[] Returns an array of House objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function findByUniqueIdNotNull() {
 
-    /*
-    public function findOneBySomeField($value): ?House
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $em = $this->getEntityManager();
+        $RAW_QUERY = 'SELECT house_unique_id FROM house where house_unique_id IS NOT NULL;';
+
+        $statement = $em->getConnection()->prepare($RAW_QUERY);
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
-    */
+
+    function findByPig($pigId) {
+      
+    }
+
 }

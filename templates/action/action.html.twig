@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Action{% endblock %}
+{% block title %}action{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('action-action') }}
@@ -11,51 +11,61 @@
         <input id="house_id" value="{{house.id}}" hidden></input>
 
     </div>
-    <h1>Action</h1>
 
-    <div>
-        <label>
-            House's amount: <input readonly id="house_amount_value" value="{{house.amount}}"></input>
-        </label>
-        <label>
-            Amount to commit: 
-            <input id="amount_to_commit" value="0"></input>
-            <button id="add-amount-to-house-button" data-href="{{ path('add')}}"   type="button" class="btn  button-green glyphicon-plus"><div id="new-amount-add-display"></div></button>
-            <button id="substract-amount-to-house-button" data-href="{{ path('substract')}}"  type="button" class="btn  button-red  glyphicon-minus"><div id="new-amount-substract-display"></div></button>
-        </label>
+    <div  class="offset-md-3 col-md-6 offset-xs-3 col-xs-6 col-xs">
+        <div style="float:right" class="glyphicon glyphicon-cog"></div>
+        <div style=" text-align:center">
+            <div >
+
+                <b>{{house.name}} amount</b> <div style="font-size:4em" readonly id="house_amount_value" value="">{{house.amount}}</div>
+
+            </div>
+            <div>
+                <label  for="amount_to_commit">
+                    Amount to commit</label>
+                <div class="offset-md-2 col-md-8 form-group ">
+                    <input style="text-align:center" id="amount_to_commit" class="form-control form-control-xlg input-lg" value="0"></input>
+                </div>
+                <div class="add-substract-buttons row  offset-md-2 col-md-8 offset-xs-2 col-xs-8 py-3">
+                    <button id="add-amount-to-house-button" data-href="{{ path('add')}}"   type="button" class="col-md-6 form-control form-control-lg px-3 btn  button-green "><div id="new-amount-add-display"></div>ADD</button>
+                    <button id="substract-amount-to-house-button" data-href="{{ path('substract')}}"  type="button" class=" col-md-6 form-control form-control-lg px-3 btn  button-red  "><div id="new-amount-substract-display"></div>SUBSTRACT</button>
+                </div>
+            </div>
+        </div>
 
     </div>    
-    <table class="table">
-        <thead>
-            <tr align="center">
-                <th>Pig</th>
-                
-                <th>Amount</th>
-                <th>Date</th>
-              
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody id="action-historic">
-            {% for action in actions %}
+    <div class="p-5">
+        <table class="table">
+            <thead>
                 <tr align="center">
-                    <td >{{ action.pig.pseudoName }}</td>
-                   
-                    <td class="{{ action.colorClass }}">{{ action.amount }}</td>
-                    <td  >{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
-                 
-                    <td  >
-                        <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
-                        <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">no records found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    <th>Pig</th>
 
-    <a href="{{ path('action_new') }}">Create new</a>
+                    <th>Amount</th>
+                    <th>Date</th>
+
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody id="action-historic">
+                {% for action in actions %}
+                    <tr align="center">
+                        <td >{{ action.pig.pseudoName }}</td>
+
+                        <td class="{{ action.colorClass }}">{{ action.amount }}</td>
+                        <td  >{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
+
+                        <td  >
+                            <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
+                            <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

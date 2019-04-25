@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 require('../../css/action/action.css');
+new CountUp("eee", 5405);
+
 $(document).ready(function () {
     changeDisplayAmountsButtons();
     $("#add-amount-to-house-button").on("click", function () {
+       
         callChangeAmountAction($(this).data("href"), successAddAmount);
     });
 
     $("#substract-amount-to-house-button").on("click", function () {
+      
         callChangeAmountAction($(this).data("href"), successSubstractAmount);
     });
     $("#amount_to_commit").on("input",function(){
@@ -24,6 +28,7 @@ function changeDisplayAmountsButtons(){
     $("#new-amount-substract-display").html(parseFloat($("#house_amount_value").val())-parseFloat($("#amount_to_commit").val()));
 }
 function callChangeAmountAction(href, callbackSuccess) {
+  
     $.ajax({
         type: "get",
         dataType: "json",
@@ -82,9 +87,16 @@ function getColumnsCorrespondance() {
     return result;
 }
 function addAmount(value) {
-    $("#house_amount_value").val(parseFloat($("#house_amount_value").val()) + parseFloat(value));
+  
+  let demo = new CountUp("eee", 5405);
+    if (!demo.error) {
+      demo.start();
+    } else {
+      console.error(demo.error);
+    }
+    $("#house_amount_value").html(parseFloat($("#house_amount_value").html()) + parseFloat(value));
 }
 function substractAmount(value) {
-    $("#house_amount_value").val(parseFloat($("#house_amount_value").val()) - parseFloat(value));
+    $("#house_amount_value").html(parseFloat($("#house_amount_value").html()) - parseFloat(value));
 }
 

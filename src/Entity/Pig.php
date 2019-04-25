@@ -168,6 +168,16 @@ class Pig implements UserInterface {
     public function getHouses(): Collection {
         return $this->houses;
     }
+    public function getJoinedHouse(){
+        
+        if(!$this->hasHouse()){
+            return $this->getHouse();
+        }
+        
+        foreach($this->getHouses() as $joinedHouse){
+            return $joinedHouse;
+        }
+    }
 
     public function addHouse(House $house): self {
         if (!$this->houses->contains($house)) {
@@ -307,4 +317,6 @@ class Pig implements UserInterface {
         
         $this->actions= $actions;
     }
+    
+   
 }

@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HouseRepository")
  */
-class House
-{
+class House {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -27,8 +27,6 @@ class House
      * @ORM\Column(type="integer", nullable=true)
      */
     private $maxPigs;
-
-    
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
@@ -76,88 +74,77 @@ class House
      */
     private $actions;
 
-    public function __construct()
-    {
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $houseUniqueId;
+
+    public function __construct() {
         $this->pigs = new ArrayCollection();
         $this->invitations = new ArrayCollection();
         $this->actions = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
+    public function setName(string $name): self {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getMaxPigs(): ?int
-    {
+    public function getMaxPigs(): ?int {
         return $this->maxPigs;
     }
 
-    public function setMaxPigs(?int $maxPigs): self
-    {
+    public function setMaxPigs(?int $maxPigs): self {
         $this->maxPigs = $maxPigs;
 
         return $this;
     }
 
-   
+    public function getAmount() {
 
-    public function getAmount()
-    {
-       
         return $this->amount;
     }
 
-    public function setAmount($amount): self
-    {
+    public function setAmount($amount): self {
         $this->amount = $amount;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
+    public function getCreatedAt(): ?\DateTimeInterface {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    {
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getLastUpdatedAt(): ?\DateTimeInterface
-    {
+    public function getLastUpdatedAt(): ?\DateTimeInterface {
         return $this->lastUpdatedAt;
     }
 
-    public function setLastUpdatedAt(?\DateTimeInterface $lastUpdatedAt): self
-    {
+    public function setLastUpdatedAt(?\DateTimeInterface $lastUpdatedAt): self {
         $this->lastUpdatedAt = $lastUpdatedAt;
 
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
+    public function getDeletedAt(): ?\DateTimeInterface {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
-    {
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -166,13 +153,11 @@ class House
     /**
      * @return Collection|Pig[]
      */
-    public function getPigs(): Collection
-    {
+    public function getPigs(): Collection {
         return $this->pigs;
     }
 
-    public function addPig(Pig $pig): self
-    {
+    public function addPig(Pig $pig): self {
         if (!$this->pigs->contains($pig)) {
             $this->pigs[] = $pig;
         }
@@ -180,8 +165,7 @@ class House
         return $this;
     }
 
-    public function removePig(Pig $pig): self
-    {
+    public function removePig(Pig $pig): self {
         if ($this->pigs->contains($pig)) {
             $this->pigs->removeElement($pig);
         }
@@ -189,25 +173,21 @@ class House
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
+    public function getPassword(): ?string {
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
-    {
+    public function setPassword(?string $password): self {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getPig(): ?Pig
-    {
+    public function getPig(): ?Pig {
         return $this->pig;
     }
 
-    public function setPig(?Pig $pig): self
-    {
+    public function setPig(?Pig $pig): self {
         $this->pig = $pig;
 
         return $this;
@@ -216,13 +196,11 @@ class House
     /**
      * @return Collection|Invitation[]
      */
-    public function getInvitations(): Collection
-    {
+    public function getInvitations(): Collection {
         return $this->invitations;
     }
 
-    public function addInvitation(Invitation $invitation): self
-    {
+    public function addInvitation(Invitation $invitation): self {
         if (!$this->invitations->contains($invitation)) {
             $this->invitations[] = $invitation;
             $invitation->setHouse($this);
@@ -231,8 +209,7 @@ class House
         return $this;
     }
 
-    public function removeInvitation(Invitation $invitation): self
-    {
+    public function removeInvitation(Invitation $invitation): self {
         if ($this->invitations->contains($invitation)) {
             $this->invitations->removeElement($invitation);
             // set the owning side to null (unless already changed)
@@ -247,13 +224,11 @@ class House
     /**
      * @return Collection|Action[]
      */
-    public function getActions(): Collection
-    {
+    public function getActions(): Collection {
         return $this->actions;
     }
 
-    public function addAction(Action $action): self
-    {
+    public function addAction(Action $action): self {
         if (!$this->actions->contains($action)) {
             $this->actions[] = $action;
             $action->setHouseId($this);
@@ -262,8 +237,10 @@ class House
         return $this;
     }
 
-    public function removeAction(Action $action): self
-    {
+   
+    
+
+    public function removeAction(Action $action): self {
         if ($this->actions->contains($action)) {
             $this->actions->removeElement($action);
             // set the owning side to null (unless already changed)
@@ -274,4 +251,15 @@ class House
 
         return $this;
     }
+
+    public function getHouseUniqueId(): ?string {
+        return $this->houseUniqueId;
+    }
+
+    public function setHouseUniqueId(?string $houseUniqueId): self {
+        $this->houseUniqueId = $houseUniqueId;
+
+        return $this;
+    }
+
 }

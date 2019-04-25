@@ -12,6 +12,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "countup.js": "^2.0.4",
         "jquery": "^3.3.1"
     }
 }

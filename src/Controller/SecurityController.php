@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pig;
+use App\Form\Pig1Type;
 use App\Form\PigType;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -35,6 +36,30 @@ class SecurityController extends AbstractController {
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('security/login.html.twig', array("error" => $error, "username" => $lastUsername));
     }
+    
+     /**
+     * @Route("/{id}", name="security_edit", requirements={"id":"\d+"})
+     */
+    public function edit(Pig $pig,AuthenticationUtils $authenticationUtils,Request $request,UserPasswordEncoderInterface $encoder, ObjectManager $manager) {
+
+        
+        $form = $this->createForm(PigType::class, $pig);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pig->setCreatedAt(new DateTime());
+            $hash = $encoder->encodePassword($pig, $pig->getPassword());
+            $pig->setPassword($hash);
+           
+            $pig->setUsername( $pig->getPseudoName());
+            $manager->persist($pig);
+            $manager->flush();
+            return $this->redirectToRoute('security_login');
+        }
+        return $this->render('security/edit.html.twig', [
+                    'pig' => $pig,
+                    'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/logout", name="security_logout")
@@ -50,9 +75,9 @@ class SecurityController extends AbstractController {
      */
     public function subscribe(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
         $pig = new Pig();
-        $pigForm = $this->createForm(PigType::class, $pig);
-        $pigForm->handleRequest($request);
-        if ($pigForm->isSubmitted() && $pigForm->isValid()) {
+        $form = $this->createForm(PigType::class, $pig);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $pig->setCreatedAt(new DateTime());
             $hash = $encoder->encodePassword($pig, $pig->getPassword());
             $pig->setPassword($hash);
@@ -63,7 +88,7 @@ class SecurityController extends AbstractController {
             return $this->redirectToRoute('security_login');
         }
         return $this->render('security/subscribe.html.twig', [
-                    'pigForm' => $pigForm->createView(),
+                    'pigForm' => $form->createView(),
         ]);
     }
 

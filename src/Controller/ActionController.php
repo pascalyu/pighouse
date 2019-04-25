@@ -21,15 +21,11 @@ class ActionController extends AbstractController {
        /**
      * @Route("/substract", name="substract", methods="GET")
      */
-    public function substract(HouseService $houseService, ObjectManager $manager, Request $request) {
+    public function substract(HouseService $houseService,  Request $request) {
 
-        $houseId = $request->get("house_id");
-      
         $pig = $this->get('security.token_storage')->getToken()->getUser();
   
-        
-       
-        $houseService->init($pig,$houseId);
+        $houseService->init($pig);
         $amount = $request->get("amount");
         $houseService->substractAmount($amount);
         $action =$houseService->getActionEntity();
@@ -46,12 +42,11 @@ class ActionController extends AbstractController {
     /**
      * @Route("/add", name="add", methods="GET")
      */
-    public function add(HouseService $houseService, ObjectManager $manager, Request $request) {
+    public function add(HouseService $houseService, Request $request) {
 
-        $houseId = $request->get("house_id");
-      
+       
         $pig = $this->get('security.token_storage')->getToken()->getUser();
-        $houseService->init($pig,$houseId);
+        $houseService->init($pig);
         $amount = $request->get("amount");
         $houseService->addAmount($amount);
         $action =$houseService->getActionEntity();
@@ -69,23 +64,25 @@ class ActionController extends AbstractController {
 
  
     /**
-     * @Route("/{houseId}", name="action_index", methods="GET")
+     * @Route("/", name="action_index", methods="GET")
      */
-    public function index(HouseService $houseService, ActionRepository $actionRepository, $houseId): Response {
+    public function index( ActionRepository $actionRepository): Response {
     
 
-        $houseRepo = $this->getDoctrine()->getRepository(House::class);
-        $house = $houseRepo->find($houseId);
+        //$houseRepo = $this->getDoctrine()->getRepository(House::class);
+        $pig = $this->get('security.token_storage')->getToken()->getUser();
+        $joinedHouse=$pig->getJoinedHouse();
+        //$house = $houseRepo->find($joinedHouse->getId());
         $filters = array(
-            'house' => $houseId,
+            'house' => $joinedHouse->getId(),
         );
         
         $actions=$actionRepository->findBy($filters, array('created_at' => 'DESC'));
         
         return $this->render('action/action.html.twig', [
                     'actions' => $actions,
-                    'house_id' => $houseId,
-                    'house' => $house,
+                    'house_id' => $joinedHouse->getId(),
+                    'house' => $joinedHouse,
         ]);
     }
     
