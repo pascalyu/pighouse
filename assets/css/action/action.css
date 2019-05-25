@@ -23,3 +23,8 @@ and open the template in the editor.
     background-color: #449d44;
     color: white;
 }
+
+.no-href-underline{
+    
+    text-decoration: none;
+}

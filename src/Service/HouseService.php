@@ -19,6 +19,8 @@ class HouseService {
     private $houseEntity;
     private $actionEntity;
 
+    
+
     public function __construct(EntityManagerInterface $entitymanager, ObjectManager $objectManager) {
         $this->houseRepository = $entitymanager->getRepository(House::class);
         $this->actionRepository = $entitymanager->getRepository(Action::class);
@@ -41,6 +43,31 @@ class HouseService {
         $this->insertAction($amountToSubstract, "SUBSTRACT");
         $this->save();
     }
+
+    public function deleteAction($action) {
+        $this->reverseAction($action);
+        $this->objectManager->persist($this->houseEntity);
+        $this->objectManager->remove($action);
+        $this->objectManager->flush();
+    }
+    
+    public function reverseAction($action){
+       $this->changeHouseAmount($this->getAmountAfterReverse($action));
+    }
+    
+    public function getAmountAfterReverse($action){
+        switch ($action->getActionType()){
+            case Action::ADD_TYPE:
+                return $this->houseEntity->getAmount() - $action->getAmount();
+              
+            case Action::SUBSTRACT_TYPE:  
+                return $this->houseEntity->getAmount() + $action->getAmount();
+            default;
+               
+        }
+         return  $this->houseEntity->getAmount() - $action->getAmount();
+    }
+
 
     public function changeHouseAmount($amount) {
         $this->houseEntity->setAmount($amount);
@@ -65,49 +92,30 @@ class HouseService {
 
     public function getActionJsonFormat($action) {
         $result = $action;
-
-
-
         $encoders = [new JsonEncoder()];
-
         $normalizer = new ObjectNormalizer();
-
         $normalizer->setIgnoredAttributes(['house']);
 
-// all callback parameters are optional (you can omit the ones you don't use)
         $normalizer->setCircularReferenceHandler(function ($object, string $format = null, array $context = []) {
             return $object->getId();
         });
-
         $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
             return $innerObject instanceof \DateTime ? $innerObject->format('Y-m-d H:i:s') : '';
         };
         $callbackPig = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
             return $innerObject instanceof \App\Entity\Pig ? $innerObject->getPseudoName() : '';
         };
-        $dateArrayCallback=['createdAt' => $callback,'date' => $callback,'lastUpdatedAt' => $callback,'pig'=> $callbackPig];
-        
-       
-        
+        //rajoute create
+        $dateArrayCallback = ['createdAt' => $callback, 'date' => $callback, 'lastUpdatedAt' => $callback, 'pig' => $callbackPig];
         if ($result->getDeletedAt() !== null) {
-            $dateArrayCallback['deletedAt']=$callback;
+            $dateArrayCallback['deletedAt'] = $callback;
         }
-         $normalizer->setCallbacks($dateArrayCallback);
-
+        $normalizer->setCallbacks($dateArrayCallback);
         $serializer = new Serializer([$normalizer], $encoders);
-
         $jsonContent = $serializer->serialize($result, 'json');
-
         $decoded = json_decode($jsonContent);
-
-
-
-
-
         return json_encode($decoded);
     }
-    
-    
 
     public function setHouseEntityById($houseId) {
         $this->houseEntity = $this->houseRepository->find($houseId);
@@ -139,6 +147,5 @@ class HouseService {
     public function testze() {
         var_dump("test service ok");
     }
-    
 
 }

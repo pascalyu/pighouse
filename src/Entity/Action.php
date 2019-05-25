@@ -4,11 +4,15 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deleted_at", timeAware=false, hardDelete=true)
  * @ExclusionPolicy("all")
  */
 class Action {
@@ -71,6 +75,9 @@ class Action {
      */
     private $house;
     private $colorClass;
+    
+    public  const ADD_TYPE="ADD";
+    public  const SUBSTRACT_TYPE="SUBSTRACT";
 
     public function getColorClass(): ?string {
         $result = "red";
@@ -156,7 +163,7 @@ class Action {
     public function getPigId(): ?int {
         return $this->pig->getId();
     }
- public function getHouseId(): ?int {
+    public function getHouseId(): ?int {
         return $this->house->getId();
     }
 
@@ -176,5 +183,5 @@ class Action {
 
         return $this;
     }
-
+   
 }

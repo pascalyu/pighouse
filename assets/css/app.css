@@ -9,3 +9,8 @@
     font-size: 2.0rem;
     line-height: 1.5;
 }
+
+.no-href-underline{
+    
+    text-decoration: none !important;
+}

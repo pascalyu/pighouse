@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/composer.json</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/bundles.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/.gitignore</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/packages/stof_doctrine_extensions.yaml</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/PigController.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Service/HouseService.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/menuNavigation.html.twig</file>
@@ -18,6 +20,7 @@
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/invitToHouseForm.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/InvitationType.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/house/joinHouse.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/package.json</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/raspberrycmd.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/SecurityController.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/Invitation.php</file>
@@ -26,6 +29,7 @@
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/assets/css/app.css</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Repository/HouseRepository.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Repository/InvitationRepository.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/composer.lock</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/ActionController.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/home.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/BackofficeController.php</file>
@@ -42,11 +46,13 @@
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/action/edit.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/assets/js/action/action.js</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/pig/new.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/webpack.config.js</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/House.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/house/show.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Form/PigType.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Migrations/Version20190224203802.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/assets/css/action/action.css</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/desktop.ini</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Repository/ActionRepository.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/config/routes.yaml</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/security/subscribe.html.twig</file>

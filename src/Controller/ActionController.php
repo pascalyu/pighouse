@@ -18,17 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/action")
  */
 class ActionController extends AbstractController {
-       /**
+
+    /**
      * @Route("/substract", name="substract", methods="GET")
      */
-    public function substract(HouseService $houseService,  Request $request) {
+    public function substract(HouseService $houseService, Request $request) {
 
         $pig = $this->get('security.token_storage')->getToken()->getUser();
-  
+
         $houseService->init($pig);
         $amount = $request->get("amount");
         $houseService->substractAmount($amount);
-        $action =$houseService->getActionEntity();
+        $action = $houseService->getActionEntity();
         $jsonContent = $houseService->getActionJsonFormat($action);
 
         $response = new JsonResponse();
@@ -37,20 +38,19 @@ class ActionController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-
 
     /**
      * @Route("/add", name="add", methods="GET")
      */
     public function add(HouseService $houseService, Request $request) {
 
-       
+
         $pig = $this->get('security.token_storage')->getToken()->getUser();
         $houseService->init($pig);
         $amount = $request->get("amount");
         $houseService->addAmount($amount);
-        $action =$houseService->getActionEntity();
-     
+        $action = $houseService->getActionEntity();
+
         $jsonContent = $houseService->getActionJsonFormat($action);
 
         $response = new JsonResponse();
@@ -59,33 +59,30 @@ class ActionController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-   
 
-
- 
     /**
      * @Route("/", name="action_index", methods="GET")
      */
-    public function index( ActionRepository $actionRepository): Response {
-    
+    public function index(ActionRepository $actionRepository): Response {
+
 
         //$houseRepo = $this->getDoctrine()->getRepository(House::class);
         $pig = $this->get('security.token_storage')->getToken()->getUser();
-        $joinedHouse=$pig->getJoinedHouse();
+        $joinedHouse = $pig->getJoinedHouse();
         //$house = $houseRepo->find($joinedHouse->getId());
         $filters = array(
             'house' => $joinedHouse->getId(),
         );
-        
-        $actions=$actionRepository->findBy($filters, array('created_at' => 'DESC'));
-        
+
+        $actions = $actionRepository->findBy($filters, array('created_at' => 'DESC'));
+
         return $this->render('action/action.html.twig', [
                     'actions' => $actions,
                     'house_id' => $joinedHouse->getId(),
                     'house' => $joinedHouse,
         ]);
     }
-    
+
     /**
      * @Route("/new", name="action_new", methods="GET|POST")
      */
@@ -137,14 +134,19 @@ class ActionController extends AbstractController {
     /**
      * @Route("/{id}", name="action_delete", methods="DELETE")
      */
-    public function delete(Request $request, Action $action): Response {
-        if ($this->isCsrfTokenValid('delete' . $action->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($action);
-            $em->flush();
-        }
+    public function delete(HouseService $houseService, Action $action): Response {
 
-        return $this->redirectToRoute('action_index');
+
+        $pig = $this->get('security.token_storage')->getToken()->getUser();
+
+        $houseService->init($pig);
+        $houseService->deleteAction($action);
+        $response = new JsonResponse();
+        $jsonContent = $houseService->getActionJsonFormat($action);
+
+        $response->setData(array('amount_deleted' => true, 'action_entity' => $jsonContent));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
 }

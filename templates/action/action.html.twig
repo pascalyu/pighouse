@@ -35,6 +35,7 @@
 
     </div>    
     <div class="p-5">
+
         <table class="table">
             <thead>
                 <tr align="center">
@@ -54,18 +55,30 @@
                         <td class="{{ action.colorClass }}">{{ action.amount }}</td>
                         <td  >{{ action.date ? action.date|date('Y-m-d H:i:s') : '' }}</td>
 
-                        <td  >
-                            <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
-                            <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+                        <td class="actions-cell">
+                            <!--a href="{{ path('action_show', {'id': action.id}) }}">show</a-->
+                            <a title="edit" class="no-href-underline glyphicon glyphicon-pencil " href="{{ path('action_edit', {'id': action.id}) }}"></a>
+                            <a  title="remove" class="remove-action no-href-underline glyphicon glyphicon-remove" data-href="{{ path('action_delete', {'id': action.id}) }}" ></a>
                         </td>
+
+
                     </tr>
                 {% else %}
                     <tr>
                         <td colspan="8">no records found</td>
                     </tr>
                 {% endfor %}
+
+
             </tbody>
         </table>
+    </div>
+
+    <div id="actions-cell-empty" hidden>
+        <td >
+            <a title="edit" class="no-href-underline glyphicon glyphicon-pencil " href="{{ path('action_edit', {'id': "tochange"}) }}"></a>
+            <a title="remove" class="remove-action no-href-underline glyphicon glyphicon-remove" data-href="{{ path('action_delete', {'id': "tochange"}) }}"></a>
+        </td>
     </div>
 
 {% endblock %}
