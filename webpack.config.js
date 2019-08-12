@@ -66,10 +66,6 @@ Encore
     .setPublicPath('/build')
 
     // will create public/build/app.js and public/build/app.css
-    .addEntry('app', './assets/js/app.js')
-    .addEntry('test', './assets/js/test.js')
-    .addEntry('action-action', './assets/js/action/action.js')
-    
 
     // allow legacy applications to use $/jQuery as a global variable
     .autoProvidejQuery()
@@ -85,6 +81,10 @@ Encore
     .autoProvidejQuery()
     // create hashed filenames (e.g. app.abc123.css)
     // .enableVersioning()
+    .addEntry('app', './assets/js/app.js')
+    .addEntry('test', './assets/js/test.js')
+    .addEntry('action-action', './assets/js/action/action.js')
+    
 
     // allow sass/scss files to be processed
     // .enableSassLoader()
