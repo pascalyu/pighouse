@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\House;
 use App\Entity\Pig;
 use App\Form\HouseType;
+use App\Repository\HouseRepository;
 use App\Service\UtilService;
+use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class DefaultController extends AbstractController {
 
@@ -59,7 +62,7 @@ class DefaultController extends AbstractController {
     /**
      * @Route("/createHouseForm/{pigId}", name="createHouseForm")
      */
-    public function createHouseForm(Request $request, ObjectManager $manager, \App\Repository\HouseRepository $houseRepository, UserPasswordEncoderInterface $encoder, $pigId) {
+    public function createHouseForm(Request $request, ObjectManager $manager, HouseRepository $houseRepository, UserPasswordEncoderInterface $encoder, $pigId) {
         $house = new House();
         $houseForm = $this->createForm(HouseType::class, $house);
         $houseForm->handleRequest($request);

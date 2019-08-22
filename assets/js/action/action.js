@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require('../../css/action/action.css');
+ require('../../css/action/action.css');
 
 import { CountUp } from '../../../node_modules/countup.js/dist/CountUp.js';
 

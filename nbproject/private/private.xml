@@ -4,13 +4,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/home.html.twig</file>
-            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/raspberrycmd.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/House.php</file>
-            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/pig/index.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/public/build/action-action.js</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Entity/Pig.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/index.html.twig</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/PigController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/assets/js/action/action.js</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/node_modules/countup.js/dist/countUp.js</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/default/raspberrycmd.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/pig/index.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/DefaultController.php</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/webpack.config.js</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/src/Controller/ActionController.php</file>
             <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/templates/base.html.twig</file>
+            <file>file:/C:/Users/Yu-Pa/Documents/worlplace/oneWeekProject/public/build/entrypoints.json</file>
         </group>
     </open-files>
 </project-private>
