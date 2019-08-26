@@ -3,7 +3,7 @@ Pig house permet de au couple de gerer le financement ensemble
 
 # guide d'installation
 
-Windows 
+## Windows 
 
-## Apache
+1. ## Apache
 ## Symfony
