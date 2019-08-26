@@ -1,9 +1,8 @@
-# pighouse
-Pig house permet de au couple de gerer le financement ensemble
+# Pighouse
+The purpose of Pighouse is to handle a fund couple
 
-# guide d'installation
+# Installation Guide
+1. ## Windows 
 
-## Windows 
-
-1. ## Apache
-## Symfony
+ 1. ## Apache
+ 1. ## Symfony
