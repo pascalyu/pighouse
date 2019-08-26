@@ -5,5 +5,5 @@ Pig house permet de au couple de gerer le financement ensemble
 
 Windows 
 
-##Apache
-2-Symfony
+## Apache
+## Symfony
