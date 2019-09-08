@@ -1,7 +1,9 @@
 # Pighouse
-The purpose of Pighouse is to handle a fund couple
+The purpose of Pighouse is to manage a common fund
 
 # Installation Guide
+
+building...
 ## Windows 
 ### WAMP
       
